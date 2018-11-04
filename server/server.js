@@ -6,9 +6,9 @@ let app = express();
 let lastRequestToken = null;
 let xeroClient = new XeroClient({
   appType: "public",
-  callbackUrl: "localhost",
-  consumerKey: ,
-  consumerSecret: ,
+  callbackUrl: "http://localhost:3000/callback",
+  consumerKey: "",
+  consumerSecret: "",
   userAgent: "Tester (PUBLIC) - Application for testing Xero",
   redirectOnError: true
 });
@@ -34,12 +34,11 @@ app.get("/callback", async function(req, res) {
   res.redirect("/");
 });
 
-app.get("/invoices/:id", async function(req, res) {
-  let invoices = await xeroClient.invoices.get({
-    Statuses: "AUTHORISED",
-    page: req.params.id
-  });
-  res.json(invoices);
+app.get("/invoices", async function(req, res) {
+  let batches = await xeroClient.oauth1Client.get("batchpayments");
+  console.log(batches);
+
+  res.json(batches);
 });
 
 app.post("/void", async function(req, res) {
