@@ -6,9 +6,9 @@ let app = express();
 let lastRequestToken = null;
 let xeroClient = new XeroClient({
   appType: "public",
-  callbackUrl: "localhost:3000/callback",
-  consumerKey: process.env.consumerKey,
-  consumerSecret: process.env.consumerSecret,
+  callbackUrl: "localhost",
+  consumerKey: ,
+  consumerSecret: ,
   userAgent: "Tester (PUBLIC) - Application for testing Xero",
   redirectOnError: true
 });
