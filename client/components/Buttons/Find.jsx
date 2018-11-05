@@ -28,7 +28,6 @@ class FindBatch extends React.Component {
     this.setState({
       input: e.target.value
     });
-    console.log(this.state);
   }
 
   render() {
