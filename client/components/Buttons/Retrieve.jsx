@@ -17,6 +17,8 @@ const styles = theme => ({
 
 function RetrieveButton(props) {
   const { classes } = props;
+  console.log(props);
+  
   return (
     <div>
       <Button

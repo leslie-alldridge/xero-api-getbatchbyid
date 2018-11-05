@@ -32516,13 +32516,9 @@ var _api2 = _interopRequireDefault(_api);
 
 var _styles = __webpack_require__(29);
 
-var _CircularProgress = __webpack_require__(105);
+var _BatchDetail = __webpack_require__(461);
 
-var _CircularProgress2 = _interopRequireDefault(_CircularProgress);
-
-var _indigo = __webpack_require__(64);
-
-var _indigo2 = _interopRequireDefault(_indigo);
+var _BatchDetail2 = _interopRequireDefault(_BatchDetail);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -32548,13 +32544,29 @@ var AllBatches = function (_React$Component) {
 
     var _this = _possibleConstructorReturn(this, (AllBatches.__proto__ || Object.getPrototypeOf(AllBatches)).call(this, props));
 
+    _this.state = { batches: [] };
     _this.getAll = _this.getAll.bind(_this);
     return _this;
   }
 
   _createClass(AllBatches, [{
     key: "getAll",
-    value: function getAll() {}
+    value: function getAll() {
+      var _this2 = this;
+
+      console.log('hit');
+
+      (0, _api2.default)('get', "/batches").then(function (res) {
+        console.log('hit');
+
+        console.log(res);
+        _this2.setState({
+          batches: res.body.BatchPayments
+        });
+      }).catch(function (err) {
+        console.log(err);
+      });
+    }
   }, {
     key: "render",
     value: function render() {
@@ -32564,7 +32576,8 @@ var AllBatches = function (_React$Component) {
         "div",
         null,
         _react2.default.createElement(_Send2.default, null),
-        _react2.default.createElement(_Retrieve2.default, { onClick: this.getAll })
+        _react2.default.createElement(_Retrieve2.default, { onClick: this.getAll }),
+        this.state.batches.length > 1 && _react2.default.createElement(_BatchDetail2.default, { batches: this.state.batches })
       );
     }
   }]);
@@ -32626,6 +32639,8 @@ var styles = function styles(theme) {
 
 function RetrieveButton(props) {
   var classes = props.classes;
+
+  console.log(props);
 
   return _react2.default.createElement(
     "div",
@@ -69192,6 +69207,41 @@ var _default = (0, _withTheme.default)()(Zoom);
 
 exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
+
+/***/ }),
+/* 461 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _react = __webpack_require__(2);
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function BatchDetail(props) {
+  console.log(props);
+
+  return _react2.default.createElement(
+    'div',
+    null,
+    props.batches && props.batches.map(function (batch) {
+      return _react2.default.createElement(
+        'p',
+        null,
+        batch.BatchPaymentID
+      );
+    })
+  );
+}
+
+exports.default = BatchDetail;
 
 /***/ })
 /******/ ]);

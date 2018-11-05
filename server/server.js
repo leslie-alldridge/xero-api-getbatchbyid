@@ -34,7 +34,7 @@ app.get("/callback", async function(req, res) {
   res.redirect("/");
 });
 
-app.get("/invoices", async function(req, res) {
+app.get("/batches", async function(req, res) {
   let batches = await xeroClient.oauth1Client.get("batchpayments");
   console.log(batches);
 
